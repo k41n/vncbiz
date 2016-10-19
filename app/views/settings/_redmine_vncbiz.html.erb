@@ -1,0 +1,21 @@
+<script type='text/javascript'>
+  function moveRight() {
+    jQuery('#shown_fields').append(jQuery('#hidden_fields option:selected'));
+    jQuery('#shown_fields option').prop('selected', 'selected');
+  }
+
+  function moveLeft() {
+    jQuery('#hidden_fields').append(jQuery('#shown_fields option:selected'));
+    jQuery('#shown_fields option').prop('selected', 'selected');
+  }
+</script>
+
+<% fields = %w(subject tracker_id project_id description due_date category_id status_id assigned_to_id) + IssueCustomField.pluck(:name) %>
+<% shown_fields = Setting[:plugin_redmine_vncbiz].blank? ? [] : Setting[:plugin_redmine_vncbiz] %>
+<% hidden_fields = fields - shown_fields %>
+<%= select_tag '', options_for_select(hidden_fields), multiple: true, style: 'width: 200px', id: 'hidden_fields' %>
+<div style='display: inline-block'>
+  <span style='display: block' onclick='moveRight()'>>></span>
+  <span style='display: block' onclick='moveLeft()'><<</span>
+</div>
+<%= select_tag 'settings', options_for_select(shown_fields), multiple: true, style: 'width: 200px', id: 'shown_fields' %>

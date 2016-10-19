@@ -1,0 +1,24 @@
+<div class='vncbiz-layout'>
+  <span class='close'>&times;</span>
+  <div class='timeline'>
+    <% for journal in @journals %>
+      <% if details_to_strings_for_timeline(journal.visible_details).any? || journal.notes.present? %>
+        <h2><%= time_tag journal.created_on %></h2>
+        <ul class="timeline-items">
+          <li class="is-hidden timeline-item">
+            <h3>
+              <%= authoring journal.created_on, journal.user, :label => :label_updated_time_by %>
+            </h3>
+            <hr/>
+            <ul class="details">
+              <% details_to_strings_for_timeline(journal.visible_details).each do |string| %>
+               <li><%= string %></li>
+              <% end %>
+              <%= render_notes(@issue, journal, reply_links: false) unless journal.notes.blank? %>
+            </ul>
+          </li>
+        </ul>
+      <% end %>
+    <% end %>
+  </div>
+</div>

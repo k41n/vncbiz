@@ -1,0 +1,43 @@
+.show-timeline {
+  margin: 5 auto;
+  display: inline-block;
+  padding: 5px;
+  border-radius: 2px;
+  background: #090;
+  color: white !important;
+  text-decoration: none !important;
+}
+
+.vncbiz-layout {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  z-index: 10000;
+}
+
+.vncbiz-layout span.close {
+  font-size: 48px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  border: solid 1px white;
+  width: 64px;
+  height: 64px;
+  text-align:center;
+  color: white;
+  cursor: pointer;
+  z-index: 10001;
+}
+
+.timeline h2 {
+  font-size: 14px;
+  padding: 0 20px;
+  border-radius: 4px;
+  min-width: 30%;
+}
+
+.timeline abbr {
+  border: none !important;
+}
