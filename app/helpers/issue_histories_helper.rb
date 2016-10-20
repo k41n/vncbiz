@@ -138,5 +138,32 @@ module IssueHistoriesHelper
         value = content_tag("i", h(value)) if value
       end
     end
+    if show_diff
+      s = l(:text_journal_changed_no_detail, :label => label)
+      unless no_html
+        diff_link = link_to 'diff',
+          {:controller => 'journals', :action => 'diff', :id => detail.journal_id,
+           :detail_id => detail.id, :only_path => options[:only_path]},
+          :title => l(:label_view_diff)
+        s << " (#{ diff_link })"
+      end
+      s.html_safe
+    elsif detail.value.present?
+      case detail.property
+      when 'attr', 'cf'
+        if detail.old_value.present?
+          l(:text_journal_changed, :label => label, :old => old_value, :new => value).html_safe
+        elsif multiple
+          l(:text_journal_added, :label => label, :value => value).html_safe
+        else
+          l(:text_journal_set_to, :label => label, :value => value).html_safe
+        end
+      when 'attachment', 'relation'
+        l(:text_journal_added, :label => label, :value => value).html_safe
+      end
+    else
+      l(:text_journal_deleted, :label => label, :old => old_value).html_safe
+    end
+
   end
 end

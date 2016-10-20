@@ -10,7 +10,7 @@
   }
 </script>
 
-<% fields = %w(subject tracker_id project_id description due_date category_id status_id assigned_to_id) + IssueCustomField.pluck(:name) %>
+<% fields = %w(subject tracker_id project_id description due_date category_id status_id assigned_to_id start_date priority_id fixed_version_id estimated_hours parent_id is_private) + IssueCustomField.pluck(:name) %>
 <% shown_fields = Setting[:plugin_redmine_vncbiz].blank? ? [] : Setting[:plugin_redmine_vncbiz] %>
 <% hidden_fields = fields - shown_fields %>
 <%= select_tag '', options_for_select(hidden_fields), multiple: true, style: 'width: 200px', id: 'hidden_fields' %>
